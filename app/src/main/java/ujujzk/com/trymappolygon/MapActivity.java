@@ -16,6 +16,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -28,7 +30,11 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.List;
@@ -44,6 +50,7 @@ public class MapActivity extends AppCompatActivity implements
 
     GoogleMap googleMap;
     GoogleApiClient googleApiClient;
+    Marker mapMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +71,10 @@ public class MapActivity extends AppCompatActivity implements
                 Address address = addresses.get(0);
                 Toast.makeText(MapActivity.this, address.getLocality(), Toast.LENGTH_SHORT).show();
                 goToLocation(address.getLatitude(), address.getLongitude(), 15f);
+
+
+                setMapMarker(address.getLatitude(), address.getLongitude(), address.getLocality());
+
             } catch (IOException | IndexOutOfBoundsException ex) {
                 ex.printStackTrace();
             }
@@ -73,12 +84,82 @@ public class MapActivity extends AppCompatActivity implements
 
     }
 
+    private void setMapMarker(double lat, double lng, String locality) {
+        MarkerOptions markerOptions = new MarkerOptions()
+                .title(locality)
+                .draggable(true)
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_round))
+                .position(new LatLng(lat, lng))
+                .snippet("I'm here");
+
+        if (mapMarker != null) {
+            mapMarker.remove();
+        }
+
+        mapMarker = googleMap.addMarker(markerOptions);
+    }
+
 
     private void initMap() {
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_map);
-        mapFragment.getMapAsync(googleMap -> {
 
-            MapActivity.this.googleMap = googleMap;
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_map);
+
+        mapFragment.getMapAsync(map -> {
+
+            MapActivity.this.googleMap = map;
+
+
+            if (googleMap != null) {
+
+                googleMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+                    @Override
+                    public void onMarkerDragStart(Marker marker) {
+                        marker.hideInfoWindow();
+                    }
+
+                    @Override
+                    public void onMarkerDrag(Marker marker) {
+
+                    }
+
+                    @Override
+                    public void onMarkerDragEnd(Marker marker) {
+                        Geocoder gc = new Geocoder(MapActivity.this);
+                        LatLng ll = marker.getPosition();
+                        try {
+                            List<Address> list = gc.getFromLocation(ll.latitude, ll.longitude, 1);
+                            Address address = list.get(0);
+                            marker.setTitle(address.getLocality());
+                            marker.showInfoWindow();
+
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+                googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+
+                    @Override
+                    public View getInfoWindow(Marker marker) {
+                        return null;
+                    }
+
+                    @Override
+                    public View getInfoContents(Marker marker) {
+                        View v = getLayoutInflater().inflate(R.layout.view_map_marker_info, null);
+                        ((TextView) v.findViewById(R.id.agent_name)).setText(marker.getTitle());
+                        ((TextView) v.findViewById(R.id.price)).setText(marker.getPosition().toString());
+
+                        return v;
+                    }
+                });
+            }
+
+
+
+
 //            this.googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
 
@@ -88,16 +169,20 @@ public class MapActivity extends AppCompatActivity implements
 //                googleMap.getUiSettings().setMyLocationButtonEnabled(true);
 //            }
 
-            googleApiClient = new GoogleApiClient.Builder(getApplicationContext())
-                    .addApi(LocationServices.API)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .build();
+//            googleApiClient = new GoogleApiClient.Builder(getApplicationContext())
+//                    .addApi(LocationServices.API)
+//                    .addConnectionCallbacks(this)
+//                    .addOnConnectionFailedListener(this)
+//                    .build();
+//
+//            googleApiClient.connect();
+            goToLocation(48.429172, 35.041056, 15f);
 
-            googleApiClient.connect();
-//            goToLocation(48.429172, 35.041056, 15f);
+
 
         });
+
+
     }
 
     @Override
