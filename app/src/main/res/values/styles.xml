@@ -2,10 +2,35 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/appWhite</item>
+        <item name="colorPrimaryVariant">@color/appWhite</item>
+        <item name="colorOnPrimary">@color/appTwilightBlue</item>
+        <item name="colorSecondary">@color/appSoftBlue</item>
+        <item name="colorSecondaryVariant">@color/appMediumBlue</item>
+        <item name="colorOnSecondary">@color/appWhite</item>
+        <item name="colorError">@color/appRedBrown</item>
+        <item name="colorOnError">@color/appWhite</item>
+        <item name="colorSurface">@color/appWhite</item>
+        <item name="colorOnSurface">@color/appTwilightBlue</item>
+        <item name="android:colorBackground">@color/appWhite</item>
+        <item name="colorOnBackground">@color/appTwilightBlue</item>
+
+        <item name="android:textColor">@color/appGreyish</item>
+    </style>
+
+    <style name="AppText" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">5sp</item>
+    </style>
+
+    <style name="AppText.MapMarker">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?colorOnPrimary</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+
+    <style name="AppText.MapMarker.Selected">
+        <item name="android:textColor">?colorOnSecondary</item>
     </style>
 
 </resources>

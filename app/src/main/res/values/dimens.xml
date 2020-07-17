@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <dimen name="map_marker_label_size">20dp</dimen>
+    <dimen name="map_marker_label_size_selected">25dp</dimen>
+</resources>

@@ -3,4 +3,46 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="colorStatusBar">@color/appWhite_90</color>
+    <color name="colorNavBar">@color/appWhite_50</color>
+    <color name="colorNavBarDark">@color/appBlack_50</color>
+
+    <color name="justBlack">#000000</color>
+    <color name="appBlack_50">#80000000</color>
+    <color name="appWhite">#ffffff</color>
+    <color name="appWhite_10">#1AFFFFFF</color>
+    <color name="appWhite_25">#40FFFFFF</color>
+    <color name="appWhite_50">#80ffffff</color>
+    <color name="appWhite_60">#99FFFFFF</color>
+    <color name="appWhite_90">#E6FFFFFF</color>
+
+
+    <color name="appTwilightBlue">#0d3152</color> <!--Text, text on enabled buttons-->
+    <color name="appTwilightBlueSemiTrans">#590d3152</color> <!--Text, text on enabled buttons-->
+    <color name="appTwilightBlueAlmostTrans">#0E0D3152</color> <!--Text, text on enabled buttons-->
+
+
+    <color name="appBeige">#ccc9c8</color>
+    <color name="appSoftBlue">#5592f2</color> <!--Accent: sub buttons, toggles, checkboxes-->
+    <color name="appMediumBlue">#2b67c6</color> <!--Hover and ripple of sub buttons-->
+    <color name="appRedBrown">#851818</color> <!--Errors-->
+    <color name="appButterYellow">#fff873</color> <!-- main buttons-->
+    <color name="appSandyYellow">#ffec73</color> <!-- Hover and ripple of main buttons-->
+
+    <color name="appWarmGrey">#999696</color> <!-- cancel btn on dialog-->
+    <color name="appGreyish">#b3b0af</color> <!-- text, text on disable buttons, hint -->
+    <color name="appGrey">#7a7a7a</color> <!-- text color-->
+    <color name="appLightGrey">#e6e3e1</color> <!-- disabled buttons bg-->
+    <color name="appGreyLightsome">#a6a3a2</color> <!-- disabled buttons bg-->
+
+    <color name="appDarkSeaGreen">#188540</color> <!-- snackbar of success-->
+
+    <color name="appEnergyA">#008528</color>
+    <color name="appEnergyB">#00a600</color>
+    <color name="appEnergyC">#7dd200</color>
+    <color name="appEnergyD">#e5de00</color>
+    <color name="appEnergyE">#ffac00</color>
+    <color name="appEnergyF">#ff4c00</color>
+    <color name="appEnergyG">#ff0000</color>
 </resources>

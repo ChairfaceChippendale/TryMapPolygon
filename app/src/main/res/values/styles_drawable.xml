@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MapMarker">
+        <attr name="marker_fill_color" format="color" />
+        <attr name="marker_stroke_color" format="color" />
+    </declare-styleable>
+
+    <style name="MarkerBlue">
+        <item name="marker_fill_color">#336699</item>
+        <item name="marker_stroke_color">#FFFFFF</item>
+    </style>
+
+    <style name="MarkerBlue.Selected">
+        <item name="marker_stroke_color">#30F722</item>
+    </style>
+
+    <style name="MarkerGrey">
+        <item name="marker_fill_color">#475C70</item>
+        <item name="marker_stroke_color">#FFFFFF</item>
+    </style>
+
+    <style name="MarkerGrey.Selected">
+        <item name="marker_stroke_color">#30F722</item>
+    </style>
+
+    <style name="MarkerPink">
+        <item name="marker_fill_color">#D67FBD</item>
+        <item name="marker_stroke_color">#FFFFFF</item>
+    </style>
+
+    <style name="MarkerPink.Selected">
+        <item name="marker_stroke_color">#30F722</item>
+    </style>
+
+    <style name="MarkerRed">
+        <item name="marker_fill_color">#DF3939</item>
+        <item name="marker_stroke_color">#00FFFFFF</item>
+    </style>
+
+    <style name="MarkerRed.Selected">
+        <item name="marker_stroke_color">#00FFFFFF</item>
+    </style>
+
+
+</resources>

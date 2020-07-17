@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "407891972882",
+    "firebase_url": "https://trymapservices.firebaseio.com",
+    "project_id": "trymapservices",
+    "storage_bucket": "trymapservices.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407891972882:android:8bba3fd6f7b0e52bf699cb",
+        "android_client_info": {
+          "package_name": "ujujzk.com.trymappolygon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "407891972882-uefp7i4644k86rp7v5pka2uq337c30ko.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGryAUFZ8Bgzeg_BP5G-261dY-An1rAV8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "407891972882-uefp7i4644k86rp7v5pka2uq337c30ko.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
