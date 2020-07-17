@@ -77,7 +77,7 @@ class MapActivity : AppCompatActivity() {
                 Random.nextDouble(-0.031111, 0.031111) to Random.nextDouble(-0.031111, 0.031111)
             }.map {
                 FatMarker(
-                        position = LatLng(48.4221935+it.first, 35.1463538+it.second),
+                        position = LatLng(48.4221935 + it.first, 35.1463538 + it.second),
 
                         type = PlaceType.TEXT,
                         text = "GG",
@@ -89,7 +89,7 @@ class MapActivity : AppCompatActivity() {
                 Random.nextDouble(-0.031111, 0.031111) to Random.nextDouble(-0.031111, 0.031111)
             }.map {
                 FatMarker(
-                        position = LatLng(48.4221935+it.first, 35.1463538+it.second),
+                        position = LatLng(48.4221935 + it.first, 35.1463538 + it.second),
 
                         type = PlaceType.PERSON,
                         text = "",
@@ -101,7 +101,7 @@ class MapActivity : AppCompatActivity() {
                 Random.nextDouble(-0.031111, 0.031111) to Random.nextDouble(-0.031111, 0.031111)
             }.map {
                 FatMarker(
-                        position = LatLng(48.4221935+it.first, 35.1463538+it.second),
+                        position = LatLng(48.4221935 + it.first, 35.1463538 + it.second),
 
                         type = PlaceType.TEXT,
                         text = "AAD",
@@ -118,7 +118,7 @@ class MapActivity : AppCompatActivity() {
                 Random.nextDouble(-0.031111, 0.031111) to Random.nextDouble(-0.031111, 0.031111)
             }.map {
                 FatMarker(
-                        position = LatLng(48.4221935+it.first, 35.1463538+it.second),
+                        position = LatLng(48.4221935 + it.first, 35.1463538 + it.second),
 
                         type = PlaceType.TEXT,
                         text = "AAD",
@@ -135,7 +135,7 @@ class MapActivity : AppCompatActivity() {
                 Random.nextDouble(-0.031111, 0.031111) to Random.nextDouble(-0.031111, 0.031111)
             }.map {
                 FatMarker(
-                        position = LatLng(48.4221935+it.first, 35.1463538+it.second),
+                        position = LatLng(48.4221935 + it.first, 35.1463538 + it.second),
 
                         type = PlaceType.BUILDING,
                         text = "",
@@ -154,7 +154,7 @@ class MapActivity : AppCompatActivity() {
                 Random.nextDouble(-0.031111, 0.031111) to Random.nextDouble(-0.031111, 0.031111)
             }.map {
                 FatMarker(
-                        position = LatLng(48.4221935+it.first, 35.1463538+it.second),
+                        position = LatLng(48.4221935 + it.first, 35.1463538 + it.second),
 
                         type = PlaceType.EMPTY,
                         text = "",
@@ -265,23 +265,23 @@ class MapActivity : AppCompatActivity() {
         if (person != null) {
             view.findViewById<ImageView>(R.id.person).setImageDrawable(person)
         } else if (fat.icon > 0) {
-            view.findViewById<ImageView>(R.id.person).setPadding(20,20,20,20)
+            view.findViewById<ImageView>(R.id.person).setPadding(20, 20, 20, 20)
             view.findViewById<ImageView>(R.id.person).setImageResource(fat.icon)
         } else {
             view.findViewById<ImageView>(R.id.person).gone()
         }
 
         fat.topLeftLabel?.let {
-            view.addView(makeLabel(it,  place = LabelPosition.TOP_LEFT, isSelected = isSelected))
+            view.addView(makeLabel(it, place = LabelPosition.TOP_LEFT, isSelected = isSelected))
         }
         fat.btmLeftLabel?.let {
-            view.addView(makeLabel(it,  place = LabelPosition.BTM_LEFT, isSelected = isSelected))
+            view.addView(makeLabel(it, place = LabelPosition.BTM_LEFT, isSelected = isSelected))
         }
         fat.topRightLabel?.let {
-            view.addView(makeLabel(it,  place = LabelPosition.TOP_RIGHT, isSelected = isSelected))
+            view.addView(makeLabel(it, place = LabelPosition.TOP_RIGHT, isSelected = isSelected))
         }
         fat.btmRightLabel?.let {
-            view.addView(makeLabel(it,  place = LabelPosition.BTM_RIGHT, isSelected = isSelected))
+            view.addView(makeLabel(it, place = LabelPosition.BTM_RIGHT, isSelected = isSelected))
         }
 
         return IconGenerator(this).apply {
@@ -309,7 +309,6 @@ class MapActivity : AppCompatActivity() {
             setContentView(view)
         }
     }
-
 
 
     private suspend fun makeLabel(
@@ -341,7 +340,7 @@ class MapActivity : AppCompatActivity() {
                 label.findViewById<TextView>(R.id.text).text = model.text
             }
             model.icon > 0 -> {
-                label.findViewById<ImageView>(R.id.image).setPadding(6,6,6,6)
+                label.findViewById<ImageView>(R.id.image).setPadding(6, 6, 6, 6)
                 label.findViewById<ImageView>(R.id.image).setImageResource(model.icon)
                 label.findViewById<TextView>(R.id.text).gone()
             }
@@ -356,12 +355,14 @@ class MapActivity : AppCompatActivity() {
         label.layoutParams = FrameLayout.LayoutParams(
                 resources.getDimensionPixelOffset(if (isSelected) R.dimen.map_marker_label_size_selected else R.dimen.map_marker_label_size),
                 resources.getDimensionPixelOffset(if (isSelected) R.dimen.map_marker_label_size_selected else R.dimen.map_marker_label_size)
-        ).apply { gravity = when(place){
-            LabelPosition.TOP_LEFT -> Gravity.TOP or (Gravity.START)
-            LabelPosition.TOP_RIGHT -> Gravity.TOP or (Gravity.END)
-            LabelPosition.BTM_LEFT -> Gravity.BOTTOM. or (Gravity.START)
-            LabelPosition.BTM_RIGHT -> Gravity.BOTTOM or (Gravity.END)
-        } }
+        ).apply {
+            gravity = when (place) {
+                LabelPosition.TOP_LEFT -> Gravity.TOP or (Gravity.START)
+                LabelPosition.TOP_RIGHT -> Gravity.TOP or (Gravity.END)
+                LabelPosition.BTM_LEFT -> Gravity.BOTTOM.or(Gravity.START)
+                LabelPosition.BTM_RIGHT -> Gravity.BOTTOM or (Gravity.END)
+            }
+        }
 
         return label
     }
@@ -422,15 +423,13 @@ class MapActivity : AppCompatActivity() {
             (getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(layoutRes, null, false)
 
 
-
-
     fun View.gone() {
-        if(visibility != View.GONE )
+        if (visibility != View.GONE)
             visibility = View.GONE
     }
 
     fun View.visible() {
-        if(visibility != View.VISIBLE )
+        if (visibility != View.VISIBLE)
             visibility = View.VISIBLE
     }
 }
