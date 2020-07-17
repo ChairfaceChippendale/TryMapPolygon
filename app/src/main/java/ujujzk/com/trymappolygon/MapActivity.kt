@@ -52,12 +52,8 @@ class MapActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (googleServicesAvailable()) {
-            binding = DataBindingUtil.setContentView(this, R.layout.activity_map)
-            initMap()
-        } else {
-            //if google googleMap is not supported there must be alternative layout
-        }
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_map)
+        initMap()
     }
 
     private fun initMap() {
@@ -71,116 +67,9 @@ class MapActivity : AppCompatActivity() {
 
 
             val pos = LatLng(48.4221935, 35.1463538)
+            getData().forEach { addCustomMarkerFromURL(googleMap, it, isSelected = false) }
+            googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, 14F))
 
-
-            val fatsText = List(10) {
-                Random.nextDouble(-0.031111, 0.031111) to Random.nextDouble(-0.031111, 0.031111)
-            }.map {
-                FatMarker(
-                        position = LatLng(48.4221935 + it.first, 35.1463538 + it.second),
-
-                        type = PlaceType.TEXT,
-                        text = "GG",
-                        personUrl = ""
-                )
-            }
-
-            val fatsPerson = List(10) {
-                Random.nextDouble(-0.031111, 0.031111) to Random.nextDouble(-0.031111, 0.031111)
-            }.map {
-                FatMarker(
-                        position = LatLng(48.4221935 + it.first, 35.1463538 + it.second),
-
-                        type = PlaceType.PERSON,
-                        text = "",
-                        personUrl = "http://waleedsarwar.com/assets/img/me.png"
-                )
-            }
-
-            val fatsTextAvatar = List(10) {
-                Random.nextDouble(-0.031111, 0.031111) to Random.nextDouble(-0.031111, 0.031111)
-            }.map {
-                FatMarker(
-                        position = LatLng(48.4221935 + it.first, 35.1463538 + it.second),
-
-                        type = PlaceType.TEXT,
-                        text = "AAD",
-                        personUrl = "",
-
-                        btmLeftLabel = FatLabel(
-                                imageUrl = "http://waleedsarwar.com/assets/img/me.png"
-                        )
-
-                )
-            }
-
-            val fatsTextText = List(10) {
-                Random.nextDouble(-0.031111, 0.031111) to Random.nextDouble(-0.031111, 0.031111)
-            }.map {
-                FatMarker(
-                        position = LatLng(48.4221935 + it.first, 35.1463538 + it.second),
-
-                        type = PlaceType.TEXT,
-                        text = "AAD",
-                        personUrl = "",
-
-                        topRightLabel = FatLabel(
-                                text = "13"
-                        )
-
-                )
-            }
-
-            val fatsTextIcon = List(10) {
-                Random.nextDouble(-0.031111, 0.031111) to Random.nextDouble(-0.031111, 0.031111)
-            }.map {
-                FatMarker(
-                        position = LatLng(48.4221935 + it.first, 35.1463538 + it.second),
-
-                        type = PlaceType.BUILDING,
-                        text = "",
-                        personUrl = "",
-                        icon = R.drawable.ic_bike,
-
-                        topRightLabel = FatLabel(
-                                icon = R.drawable.ic_bathroom_mini,
-                                bgColor = ContextCompat.getColor(this@MapActivity, R.color.appButterYellow)
-                        )
-
-                )
-            }
-
-            val fatsEmptyIcon = List(10) {
-                Random.nextDouble(-0.031111, 0.031111) to Random.nextDouble(-0.031111, 0.031111)
-            }.map {
-                FatMarker(
-                        position = LatLng(48.4221935 + it.first, 35.1463538 + it.second),
-
-                        type = PlaceType.EMPTY,
-                        text = "",
-                        personUrl = "",
-
-                        topLeftLabel = FatLabel(
-                                icon = R.drawable.ic_area_mini,
-                                bgColor = ContextCompat.getColor(this@MapActivity, R.color.appEnergyF)
-                        ),
-                        btmLeftLabel = FatLabel(
-                                imageUrl = "http://waleedsarwar.com/assets/img/me.png"
-                        )
-                )
-            }
-
-
-
-
-
-
-            (fatsText + fatsPerson + fatsTextAvatar + fatsTextText + fatsTextIcon + fatsEmptyIcon).forEach {
-                addCustomMarkerFromURL(googleMap, it, isSelected = false)
-            }
-
-
-            googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, 15F))
 
             googleMap?.setOnMarkerClickListener {
 
@@ -348,7 +237,7 @@ class MapActivity : AppCompatActivity() {
         }
         ImageViewCompat.setImageTintList(
                 label.findViewById(R.id.background),
-                ColorStateList.valueOf(model.bgColor)
+                ColorStateList.valueOf(ContextCompat.getColor(this, model.bgColor))
         )
 
 
@@ -368,56 +257,6 @@ class MapActivity : AppCompatActivity() {
     }
 
 
-    private fun googleServicesAvailable(): Boolean {
-        val apiAvailability = GoogleApiAvailability.getInstance()
-        val isAvailable = apiAvailability.isGooglePlayServicesAvailable(applicationContext)
-        if (isAvailable == ConnectionResult.SUCCESS) {
-            return true
-        } else if (apiAvailability.isUserResolvableError(isAvailable)) {
-            val dialog = apiAvailability.getErrorDialog(this, isAvailable, 0)
-            dialog.show()
-        } else {
-            Toast.makeText(this, "Cant connect to google play services", Toast.LENGTH_LONG).show()
-        }
-        return false
-    }
-
-
-    data class FatMarker(
-            val position: LatLng,
-
-            val type: PlaceType, //central icon and color
-            val text: String, //central text
-            val personUrl: String, //central
-            @DrawableRes val icon: Int = -1,
-
-
-            val topLeftLabel: FatLabel? = null,
-            val topRightLabel: FatLabel? = null,
-            val btmLeftLabel: FatLabel? = null,
-            val btmRightLabel: FatLabel? = null
-    )
-
-    data class FatLabel(
-            @ColorInt val bgColor: Int = Color.WHITE,
-            val imageUrl: String? = null,
-            val text: String? = null,
-            @DrawableRes val icon: Int = -1
-    )
-
-    enum class PlaceType {
-        EMPTY,
-        TEXT,
-        BUILDING,
-        PERSON
-    }
-
-    enum class LabelPosition {
-        TOP_LEFT,
-        TOP_RIGHT,
-        BTM_LEFT,
-        BTM_RIGHT
-    }
 
     fun Context.inflate(@LayoutRes layoutRes: Int): View =
             (getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(layoutRes, null, false)
