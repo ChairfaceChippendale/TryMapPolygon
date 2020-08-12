@@ -30,7 +30,7 @@ fun getData(): List<FatMarker> {
 
                 type = PlaceType.PERSON,
                 text = "",
-                personUrl = "http://waleedsarwar.com/assets/img/me.png"
+                personUrl = "https://sidekickselling.blob.core.windows.net/profilemedia/57b1514f-5ecf-4eda-b172-a98d1b74a89b.png"
         )
     }
 
@@ -45,7 +45,7 @@ fun getData(): List<FatMarker> {
                 personUrl = "",
 
                 btmLeftLabel = FatLabel(
-                        imageUrl = "http://waleedsarwar.com/assets/img/me.png"
+                        imageUrl = "https://sidekickselling.blob.core.windows.net/profilemedia/57b1514f-5ecf-4eda-b172-a98d1b74a89b.png"
                 )
 
         )
@@ -102,7 +102,7 @@ fun getData(): List<FatMarker> {
                         bgColor = R.color.appEnergyF
                 ),
                 btmLeftLabel = FatLabel(
-                        imageUrl = "http://waleedsarwar.com/assets/img/me.png"
+                        imageUrl = "https://sidekickselling.blob.core.windows.net/profilemedia/57b1514f-5ecf-4eda-b172-a98d1b74a89b.png"
                 )
         )
     }
